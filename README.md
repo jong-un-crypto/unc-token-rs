@@ -36,7 +36,7 @@ fn main() {
     let input_near: UncToken = input_str.parse().unwrap();
     assert_eq!(
         input_near,
-        UncToken::from_yoctonear(123456000000000000000000)
+        UncToken::from_yoctounc(123456000000000000000000)
     );
 
 }
