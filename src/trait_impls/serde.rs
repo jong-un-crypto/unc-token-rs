@@ -47,7 +47,7 @@ mod test {
             let ser = serde_json::to_string(&gas).unwrap();
             assert_eq!(ser, format!("\"{}\"", val));
             let de: UncToken = serde_json::from_str(&ser).unwrap();
-            assert_eq!(de.as_yoctonear(), val);
+            assert_eq!(de.as_yoctounc(), val);
         }
 
         test_json_ser(u128::MAX);

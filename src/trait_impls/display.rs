@@ -14,11 +14,11 @@ impl std::fmt::Display for UncToken {
             write!(f, "<0.001 UNC")
         } else if *self <= UncToken::from_milliunc(999) {
             let millinear_rounded_up =
-                self.as_yoctonear().saturating_add(ONE_MILLIUNC - 1) / ONE_MILLIUNC;
+                self.as_yoctounc().saturating_add(ONE_MILLIUNC - 1) / ONE_MILLIUNC;
             write!(f, "0.{:03} UNC", millinear_rounded_up)
         } else {
             let near_rounded_up =
-                self.as_yoctonear().saturating_add(10 * ONE_MILLIUNC - 1) / ONE_MILLIUNC / 10;
+                self.as_yoctounc().saturating_add(10 * ONE_MILLIUNC - 1) / ONE_MILLIUNC / 10;
             write!(
                 f,
                 "{}.{:02} UNC",
@@ -98,7 +98,7 @@ mod test {
                 unc_tokens.to_string(),
                 expected_display,
                 "tokens: {}",
-                unc_tokens.as_yoctonear()
+                unc_tokens.as_yoctounc()
             );
         }
     }

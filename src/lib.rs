@@ -103,13 +103,13 @@ impl UncToken {
         self.inner / ONE_MILLIUNC
     }
 
-    /// `as_yoctonear` is a function that shows a number of yocto-unc.
+    /// `as_yoctounc` is a function that shows a number of yocto-unc.
     /// # Examples
     /// ```
     /// use unc_token::UncToken;
-    /// assert_eq!(UncToken::from_yoctounc(10).as_yoctonear(), 10)
+    /// assert_eq!(UncToken::from_yoctounc(10).as_yoctounc(), 10)
     /// ```
-    pub const fn as_yoctonear(&self) -> u128 {
+    pub const fn as_yoctounc(&self) -> u128 {
         self.inner
     }
 
@@ -134,7 +134,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(u128::MAX -2).checked_add(UncToken::from_yoctounc(3)), None);
     /// ```
     pub const fn checked_add(self, rhs: Self) -> Option<Self> {
-        if let Some(unc) = self.as_yoctonear().checked_add(rhs.as_yoctonear()) {
+        if let Some(unc) = self.as_yoctounc().checked_add(rhs.as_yoctounc()) {
             Some(Self::from_yoctounc(unc))
         } else {
             None
@@ -150,7 +150,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(2).checked_sub(UncToken::from_yoctounc(3)), None);
     /// ```
     pub const fn checked_sub(self, rhs: Self) -> Option<Self> {
-        if let Some(unc) = self.as_yoctonear().checked_sub(rhs.as_yoctonear()) {
+        if let Some(unc) = self.as_yoctounc().checked_sub(rhs.as_yoctounc()) {
             Some(Self::from_yoctounc(unc))
         } else {
             None
@@ -166,7 +166,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(2).checked_mul(2), Some(UncToken::from_yoctounc(4)));
     /// assert_eq!(UncToken::from_yoctounc(u128::MAX).checked_mul(2), None)
     pub const fn checked_mul(self, rhs: u128) -> Option<Self> {
-        if let Some(unc) = self.as_yoctonear().checked_mul(rhs) {
+        if let Some(unc) = self.as_yoctounc().checked_mul(rhs) {
             Some(Self::from_yoctounc(unc))
         } else {
             None
@@ -182,7 +182,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(2).checked_div(0), None);
     /// ```
     pub const fn checked_div(self, rhs: u128) -> Option<Self> {
-        if let Some(unc) = self.as_yoctonear().checked_div(rhs) {
+        if let Some(unc) = self.as_yoctounc().checked_div(rhs) {
             Some(Self::from_yoctounc(unc))
         } else {
             None
@@ -198,7 +198,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(u128::MAX).saturating_add(UncToken::from_yoctounc(1)), UncToken::from_yoctounc(u128::MAX));
     /// ```
     pub const fn saturating_add(self, rhs: Self) -> Self {
-        UncToken::from_yoctounc(self.as_yoctonear().saturating_add(rhs.as_yoctonear()))
+        UncToken::from_yoctounc(self.as_yoctounc().saturating_add(rhs.as_yoctounc()))
     }
 
     /// Saturating integer subtraction. Computes self - rhs, saturating at the numeric bounds instead of overflowing.
@@ -210,7 +210,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(1).saturating_sub(UncToken::from_yoctounc(2)), UncToken::from_yoctounc(0));
     /// ```
     pub const fn saturating_sub(self, rhs: Self) -> Self {
-        UncToken::from_yoctounc(self.as_yoctonear().saturating_sub(rhs.as_yoctonear()))
+        UncToken::from_yoctounc(self.as_yoctounc().saturating_sub(rhs.as_yoctounc()))
     }
 
     /// Saturating integer multiplication. Computes self * rhs, saturating at the numeric bounds instead of overflowing.
@@ -223,7 +223,7 @@ impl UncToken {
     /// assert_eq!(UncToken::from_yoctounc(u128::MAX).saturating_mul(2), UncToken::from_yoctounc(u128::MAX));
     /// ```
     pub const fn saturating_mul(self, rhs: u128) -> Self {
-        UncToken::from_yoctounc(self.as_yoctonear().saturating_mul(rhs))
+        UncToken::from_yoctounc(self.as_yoctounc().saturating_mul(rhs))
     }
 
     /// Saturating integer division. Computes self / rhs, saturating at the numeric bounds instead of overflowing.
@@ -238,7 +238,7 @@ impl UncToken {
         if rhs == 0 {
             return UncToken::from_yoctounc(0);
         }
-        UncToken::from_yoctounc(self.as_yoctonear().saturating_div(rhs))
+        UncToken::from_yoctounc(self.as_yoctounc().saturating_div(rhs))
     }
 }
 

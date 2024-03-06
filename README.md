@@ -30,7 +30,7 @@ fn main() {
     assert_eq!(TEN_UNC.to_string(), "10.00 UNC");
     assert_eq!(TEN_UNC.as_near(), 10);
     assert_eq!(TEN_UNC.as_millinear(), 10000);
-    assert_eq!(TEN_UNC.as_yoctonear(), 10000000000000000000000000);
+    assert_eq!(TEN_UNC.as_yoctounc(), 10000000000000000000000000);
 
     let input_str = "0.123456 UNC";
     let input_near: UncToken = input_str.parse().unwrap();

@@ -12,7 +12,7 @@ mod test {
             // println!("{:?}", ser);
             assert_eq!(expected_serialized_value, ser.as_slice());
             let de: UncToken = UncToken::try_from_slice(&ser).unwrap();
-            assert_eq!(de.as_yoctonear(), val);
+            assert_eq!(de.as_yoctounc(), val);
         }
 
         test_borsh_ser(
