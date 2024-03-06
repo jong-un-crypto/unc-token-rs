@@ -2,16 +2,16 @@
 mod test {
     use borsh::{to_vec, BorshDeserialize};
 
-    use crate::NearToken;
+    use crate::UncToken;
 
     #[test]
     fn borsh() {
         fn test_borsh_ser(val: u128, expected_serialized_value: [u8; 16]) {
-            let gas = NearToken::from_yoctonear(val);
+            let gas = UncToken::from_yoctonear(val);
             let ser = to_vec(&gas).unwrap();
             // println!("{:?}", ser);
             assert_eq!(expected_serialized_value, ser.as_slice());
-            let de: NearToken = NearToken::try_from_slice(&ser).unwrap();
+            let de: UncToken = UncToken::try_from_slice(&ser).unwrap();
             assert_eq!(de.as_yoctonear(), val);
         }
 

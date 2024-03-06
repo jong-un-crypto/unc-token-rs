@@ -1,6 +1,6 @@
-use crate::NearToken;
+use crate::UncToken;
 
-impl schemars::JsonSchema for NearToken {
+impl schemars::JsonSchema for UncToken {
     fn is_referenceable() -> bool {
         false
     }

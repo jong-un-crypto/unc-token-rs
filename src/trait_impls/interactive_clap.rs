@@ -1,5 +1,5 @@
-use crate::NearToken;
+use crate::UncToken;
 
-impl interactive_clap::ToCli for NearToken {
-    type CliVariant = NearToken;
+impl interactive_clap::ToCli for UncToken {
+    type CliVariant = UncToken;
 }

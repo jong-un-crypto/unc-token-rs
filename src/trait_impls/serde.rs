@@ -1,8 +1,8 @@
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
-use crate::NearToken;
+use crate::UncToken;
 
-impl Serialize for NearToken {
+impl Serialize for UncToken {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
@@ -24,29 +24,29 @@ impl Serialize for NearToken {
     }
 }
 
-impl<'de> Deserialize<'de> for NearToken {
+impl<'de> Deserialize<'de> for UncToken {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s: String = Deserialize::deserialize(deserializer)?;
         s.parse::<u128>()
-            .map(NearToken::from_yoctonear)
+            .map(UncToken::from_yoctonear)
             .map_err(|err| de::Error::custom(err.to_string()))
     }
 }
 
 #[cfg(test)]
 mod test {
-    use crate::NearToken;
+    use crate::UncToken;
 
     #[test]
     fn json_ser() {
         fn test_json_ser(val: u128) {
-            let gas = NearToken::from_yoctonear(val);
+            let gas = UncToken::from_yoctonear(val);
             let ser = serde_json::to_string(&gas).unwrap();
             assert_eq!(ser, format!("\"{}\"", val));
-            let de: NearToken = serde_json::from_str(&ser).unwrap();
+            let de: UncToken = serde_json::from_str(&ser).unwrap();
             assert_eq!(de.as_yoctonear(), val);
         }
 
