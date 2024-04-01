@@ -7,12 +7,12 @@ mod test {
     #[test]
     fn borsh() {
         fn test_borsh_ser(val: u128, expected_serialized_value: [u8; 16]) {
-            let gas = UncToken::from_yoctounc(val);
+            let gas = UncToken::from_attounc(val);
             let ser = to_vec(&gas).unwrap();
             // println!("{:?}", ser);
             assert_eq!(expected_serialized_value, ser.as_slice());
             let de: UncToken = UncToken::try_from_slice(&ser).unwrap();
-            assert_eq!(de.as_yoctounc(), val);
+            assert_eq!(de.as_attounc(), val);
         }
 
         test_borsh_ser(

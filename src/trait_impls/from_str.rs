@@ -13,7 +13,7 @@ impl std::str::FromStr for UncToken {
             "UNC" | "N" => ONE_UNC,
             _ => return Err(UncTokenError::InvalidTokenUnit(s.to_owned())),
         };
-        Ok(UncToken::from_yoctounc(
+        Ok(UncToken::from_attounc(
             crate::utils::parse_decimal_number(value.trim(), unit_precision)
                 .map_err(UncTokenError::InvalidTokensAmount)?,
         ))
@@ -32,7 +32,7 @@ mod test {
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
         assert_eq!(
             gas.unwrap(),
-            UncToken::from_yoctounc(123456000000000000000000)
+            UncToken::from_attounc(123456000000000000000000)
         );
     }
     #[test]
@@ -41,15 +41,15 @@ mod test {
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
         assert_eq!(
             gas.unwrap(),
-            UncToken::from_yoctounc(11123456000000000000000000)
+            UncToken::from_attounc(11123456000000000000000000)
         );
     }
 
     #[test]
-    fn parse_yocto_number() {
+    fn parse_atto_number() {
         let data = "123456 YN";
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
-        assert_eq!(gas.unwrap(), UncToken::from_yoctounc(123456));
+        assert_eq!(gas.unwrap(), UncToken::from_attounc(123456));
     }
 
     #[test]

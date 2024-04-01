@@ -31,7 +31,7 @@ impl<'de> Deserialize<'de> for UncToken {
     {
         let s: String = Deserialize::deserialize(deserializer)?;
         s.parse::<u128>()
-            .map(UncToken::from_yoctounc)
+            .map(UncToken::from_attounc)
             .map_err(|err| de::Error::custom(err.to_string()))
     }
 }
@@ -43,11 +43,11 @@ mod test {
     #[test]
     fn json_ser() {
         fn test_json_ser(val: u128) {
-            let gas = UncToken::from_yoctounc(val);
+            let gas = UncToken::from_attounc(val);
             let ser = serde_json::to_string(&gas).unwrap();
             assert_eq!(ser, format!("\"{}\"", val));
             let de: UncToken = serde_json::from_str(&ser).unwrap();
-            assert_eq!(de.as_yoctounc(), val);
+            assert_eq!(de.as_attounc(), val);
         }
 
         test_json_ser(u128::MAX);
