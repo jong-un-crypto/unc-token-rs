@@ -28,14 +28,14 @@ fn main() {
     const TEN_UNC: UncToken = UncToken::from_unc(10);
 
     assert_eq!(TEN_UNC.to_string(), "10.00 UNC");
-    assert_eq!(TEN_UNC.as_near(), 10);
-    assert_eq!(TEN_UNC.as_millinear(), 10000);
+    assert_eq!(TEN_UNC.as_unc(), 10);
+    assert_eq!(TEN_UNC.as_milliunc(), 10000);
     assert_eq!(TEN_UNC.as_attounc(), 10000000000000000000000000);
 
     let input_str = "0.123456 UNC";
-    let input_near: UncToken = input_str.parse().unwrap();
+    let input_unc: UncToken = input_str.parse().unwrap();
     assert_eq!(
-        input_near,
+        input_unc,
         UncToken::from_attounc(123456000000000000000000)
     );
 

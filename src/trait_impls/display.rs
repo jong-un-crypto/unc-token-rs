@@ -13,17 +13,17 @@ impl std::fmt::Display for UncToken {
         } else if *self < UncToken::from_milliunc(1) {
             write!(f, "<0.001 UNC")
         } else if *self <= UncToken::from_milliunc(999) {
-            let millinear_rounded_up =
+            let milliunc_rounded_up =
                 self.as_attounc().saturating_add(ONE_MILLIUNC - 1) / ONE_MILLIUNC;
-            write!(f, "0.{:03} UNC", millinear_rounded_up)
+            write!(f, "0.{:03} UNC", milliunc_rounded_up)
         } else {
-            let near_rounded_up =
+            let unc_rounded_up =
                 self.as_attounc().saturating_add(10 * ONE_MILLIUNC - 1) / ONE_MILLIUNC / 10;
             write!(
                 f,
                 "{}.{:02} UNC",
-                near_rounded_up / 100,
-                near_rounded_up % 100
+                unc_rounded_up / 100,
+                unc_rounded_up % 100
             )
         }
     }

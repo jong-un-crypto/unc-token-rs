@@ -7,9 +7,9 @@
 //! ```
 //! use unc_token::UncToken;
 //!
-//! let one_near = UncToken::from_attounc(10_u128.pow(24));
-//! assert_eq!(one_near, UncToken::from_unc(1));
-//! assert_eq!(one_near, UncToken::from_milliunc(1000));
+//! let one_unc = UncToken::from_attounc(10_u128.pow(24));
+//! assert_eq!(one_unc, UncToken::from_unc(1));
+//! assert_eq!(one_unc, UncToken::from_milliunc(1000));
 //! ```
 //!
 //! # Crate features
@@ -83,23 +83,23 @@ impl UncToken {
         }
     }
 
-    /// `as_near` is a function that converts number of atto-unc to an equivalent to the unc.
+    /// `as_unc` is a function that converts number of atto-unc to an equivalent to the unc.
     /// # Examples
     /// ```
     /// use unc_token::UncToken;
-    /// assert_eq!(UncToken::from_attounc(10u128.pow(24)).as_near(), 1)
+    /// assert_eq!(UncToken::from_attounc(10u128.pow(24)).as_unc(), 1)
     /// ```
-    pub const fn as_near(&self) -> u128 {
+    pub const fn as_unc(&self) -> u128 {
         self.inner / ONE_UNC
     }
 
-    /// `as_millinear` is a function that converts number of atto-unc to an equivalent to the mili-unc.
+    /// `as_milliunc` is a function that converts number of atto-unc to an equivalent to the mili-unc.
     /// # Examples
     /// ```
     /// use unc_token::UncToken;
-    /// assert_eq!(UncToken::from_attounc(10u128.pow(21)).as_millinear(), 1)
+    /// assert_eq!(UncToken::from_attounc(10u128.pow(21)).as_milliunc(), 1)
     /// ```
-    pub const fn as_millinear(&self) -> u128 {
+    pub const fn as_milliunc(&self) -> u128 {
         self.inner / ONE_MILLIUNC
     }
 

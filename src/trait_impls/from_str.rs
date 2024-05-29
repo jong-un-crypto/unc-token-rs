@@ -104,9 +104,9 @@ mod test {
 
     #[test]
     fn test_from_str_f64_gas_without_int() {
-        let near_gas = UncToken::from_str(".055 ynear").unwrap_err();
+        let unc_gas = UncToken::from_str(".055 yunc").unwrap_err();
         assert_eq!(
-            near_gas,
+            unc_gas,
             UncTokenError::InvalidTokensAmount(DecimalNumberParsingError::InvalidNumber(
                 ".055".to_string()
             ))
@@ -115,36 +115,36 @@ mod test {
 
     #[test]
     fn test_from_str_without_unit() {
-        let near_gas = UncToken::from_str("100").unwrap_err();
+        let unc_gas = UncToken::from_str("100").unwrap_err();
         assert_eq!(
-            near_gas,
+            unc_gas,
             UncTokenError::InvalidTokenUnit("100".to_string())
         );
     }
 
     #[test]
     fn test_from_str_incorrect_unit() {
-        let near_gas = UncToken::from_str("100 UAH").unwrap_err();
+        let unc_gas = UncToken::from_str("100 UAH").unwrap_err();
         assert_eq!(
-            near_gas,
+            unc_gas,
             UncTokenError::InvalidTokenUnit("100 UAH".to_string())
         );
     }
 
     #[test]
     fn test_from_str_invalid_double_dot() {
-        let near_gas = UncToken::from_str("100.55.").unwrap_err();
+        let unc_gas = UncToken::from_str("100.55.").unwrap_err();
         assert_eq!(
-            near_gas,
+            unc_gas,
             UncTokenError::InvalidTokenUnit("100.55.".to_string())
         );
     }
 
     #[test]
     fn test_from_str_large_fractional_part() {
-        let near_gas = UncToken::from_str("100.1111122222333 ynear").unwrap_err(); // 13 digits after "."
+        let unc_gas = UncToken::from_str("100.1111122222333 yunc").unwrap_err(); // 13 digits after "."
         assert_eq!(
-            near_gas,
+            unc_gas,
             UncTokenError::InvalidTokensAmount(DecimalNumberParsingError::LongFractional(
                 "1111122222333".to_string()
             ))
