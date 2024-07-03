@@ -9,7 +9,7 @@ impl std::str::FromStr for UncToken {
                 .ok_or_else(|| UncTokenError::InvalidTokenUnit(s.to_owned()))?,
         );
         let unit_precision = match unit {
-            "YN" | "YUNC" | "YOCTOUNC" => 1,
+            "AN" | "AUNC" | "ATTOUNC" => 1,
             "UNC" | "N" => ONE_UNC,
             _ => return Err(UncTokenError::InvalidTokenUnit(s.to_owned())),
         };
@@ -47,14 +47,14 @@ mod test {
 
     #[test]
     fn parse_atto_number() {
-        let data = "123456 YN";
+        let data = "123456 AN";
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
         assert_eq!(gas.unwrap(), UncToken::from_attounc(123456));
     }
 
     #[test]
     fn doubledot() {
-        let data = "1.1.1 Near";
+        let data = "1.1.1 UNC";
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
         assert_eq!(
             gas,
@@ -92,7 +92,7 @@ mod test {
 
     #[test]
     fn invalid_whole() {
-        let data = "-1 Near";
+        let data = "-1 UNC";
         let gas: Result<UncToken, UncTokenError> = FromStr::from_str(data);
         assert_eq!(
             gas,
@@ -142,7 +142,7 @@ mod test {
 
     #[test]
     fn test_from_str_large_fractional_part() {
-        let unc_gas = UncToken::from_str("100.1111122222333 yunc").unwrap_err(); // 13 digits after "."
+        let unc_gas = UncToken::from_str("100.1111122222333 aunc").unwrap_err(); // 13 digits after "."
         assert_eq!(
             unc_gas,
             UncTokenError::InvalidTokensAmount(DecimalNumberParsingError::LongFractional(
